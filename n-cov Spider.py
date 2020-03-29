@@ -18,9 +18,12 @@ def getInformation():
     except:
         return "Error"
 
+def dataMake(data, getType):
+
 
 def main():
 	data = getInformation()
+	result = dataMake(data, getType)
 	if data == "Error":
 		print("!抓取错误！\n")
 
