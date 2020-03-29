@@ -29,9 +29,9 @@ def dataMake(dataJs,dataLs):
 
 def writeFile(place,data):
     data = str(data)
-    filehandle = open(place,'w', encoding="utf-8")
-    filehandle.write(data)
-    filehandle.close()
+    file = open(place,'w', encoding="utf-8")
+    file.write(data)
+    file.close()
 
 def main():
 	# 疫情分类，分为国内：0，国外：1
