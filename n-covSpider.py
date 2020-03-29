@@ -1,5 +1,6 @@
 import requests
 import json
+import types
 from bs4 import BeautifulSoup
 
 def getInformationChina():
@@ -27,6 +28,49 @@ def dataMake(dataJs,dataLs):
 	dataLs[1] = json.loads(dataJs[1])
 	return dataLs
 
+
+# def dict_get(dict, objkey, default):
+# 	tmp = dict
+# 	for k,v in tmp.items():
+# 		if k == objkey:
+# 			return v
+# 		else:
+# 			if type(v) == "Dictionary":
+# 				ret = dict_get(v, objkey, default)
+# 				if ret is not default:
+# 					return ret
+# 			else:
+# 				noDict = v
+# 				while(1):
+# 					for k,v in noDict.items():
+# 						if k == objkey:
+# 							return v
+# 						elif
+# 						else:
+# 							bleak
+
+# 获取字典中的objkey对应的值，适用于字典嵌套
+# dict:字典
+# objkey:目标key
+# default:找不到时返回的默认值
+def MoreDictGet(dict,objkey,default):
+	tmp = dict
+	for k,v in tmp.items():
+		if k == objkey:
+			return v
+		print(v)
+		print(type(v))
+		if type(v) == dict:
+			rel = MoreDictGet(v,objkey,default)
+			return rel
+
+	return default			
+
+def chinsVirous(data):
+	ls = []
+	ls.append(MoreDictGet(data,"lastUpdateTime","none"))
+	return ls
+
 def writeFile(place,data):
     data = str(data)
     file = open(place,'w', encoding="utf-8")
@@ -47,10 +91,13 @@ def main():
 
 	else:
 		print("#获取成功\n")
-		getType = input("#请输入你需要的数据代码\n>>>")
-		result = dataMake(dataJs,dataLs)
-		print(result)
-		writeFile("test.txt",result[0])
+
+		dataLs = dataMake(dataJs,dataLs)
+
+		chinaRuselt = chinsVirous(dataLs[0])
+
+		print(chinaRuselt)
+		# writeFile("test.txt",result[0])
 	input("回车退出")
 
 main()
