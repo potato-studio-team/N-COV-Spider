@@ -1,4 +1,5 @@
 import requests
+import json
 from bs4 import BeautifulSoup
 
 def getInformation():
@@ -18,16 +19,21 @@ def getInformation():
     except:
         return "Error"
 
-def dataMake(data, getType):
-
+def dataMake(dataJs, getType):
+	dataLs = json.loads(dataJs)
+	return dataLs
 
 def main():
-	data = getInformation()
-	result = dataMake(data, getType)
+	print("#正在获取数据...\n")
+	dataJs = getInformation()
+
 	if data == "Error":
 		print("!抓取错误！\n")
 
 	else:
-
+		print("#获取成功\n")
+		getType = input("#请输入你需要的数据代码\n>>>")
+		result = dataMake(dataJs, getType)
+		print
 
 main()
