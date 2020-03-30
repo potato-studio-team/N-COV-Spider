@@ -28,27 +28,6 @@ def dataMake(dataJs,dataLs):
 	dataLs[1] = json.loads(dataJs[1])
 	return dataLs
 
-
-# def dict_get(dict, objkey, default):
-# 	tmp = dict
-# 	for k,v in tmp.items():
-# 		if k == objkey:
-# 			return v
-# 		else:
-# 			if type(v) == "Dictionary":
-# 				ret = dict_get(v, objkey, default)
-# 				if ret is not default:
-# 					return ret
-# 			else:
-# 				noDict = v
-# 				while(1):
-# 					for k,v in noDict.items():
-# 						if k == objkey:
-# 							return v
-# 						elif
-# 						else:
-# 							bleak
-
 # 获取字典中的objkey对应的值，适用于字典嵌套
 # dict:字典
 # objkey:目标key
@@ -68,6 +47,10 @@ def MoreDictGet(dict,objkey,default):
 
 def chinsVirous(data):
 	ls = []
+	# 修补腾讯API格式错误
+	data = eval(data["data"].replace("true","True").replace("false","False"))
+	
+	# 搜索日期数据
 	ls.append(MoreDictGet(data,"lastUpdateTime","none"))
 	return ls
 
