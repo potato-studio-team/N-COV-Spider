@@ -174,7 +174,7 @@ def chinsVirous(data):
 	dic = MoreDictGet(data,"areaTree","none")
 	dic = MoreDictGet(dic[0],"children","none")# 解决列表问题
 
-	ls.append("编号 省份  现有确诊  现有疑似  累计确诊  治愈  死亡")
+	ls.append("排序 省份  现有确诊  现有疑似  累计确诊  治愈  死亡")
 	num = 0
 
 	for di in dic:
@@ -202,6 +202,8 @@ def foreignVirous(data):
 	dic = MoreDictGet(data,"data","none")
 
 	num = 0
+
+	ls.append("排序 国家   累计确诊   新增确诊  治愈   死亡")
 	for di in dic:
 		# 各国数据统计并输出
 		cName = MoreDictGet(di,"name","none")
@@ -213,8 +215,9 @@ def foreignVirous(data):
 		num = num + 1
 
 		ls.append(str(num) + ".  " + str(cName) + "   " + str(wdConfirm) + 
-			"   " + str(wdNowConfirm) + "   " + wdHeal + "   " + wdDead)
+			"   " + str(wdNowConfirm) + "   " + str(wdHeal) + "   " + str(wdDead))
 
+	return ls
 
 def writeFile(place,data):
     data = str(data)
@@ -245,7 +248,7 @@ def main():
 		for i in result:
 			print(i + "\n")
 
-		check = input("请输入你要查看的数据类型：\n\n总览：M\n\n中国疫情：C\n\n国际疫情：F\n>>>")
+		check = input("\n请输入你要查看的数据类型：\n\n总览：M\n\n中国疫情：C\n\n国际疫情：F\n>>>")
 		if check == "M" or check == "m":
 			result = MainVirous(dataLs)
 
