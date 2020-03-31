@@ -54,26 +54,49 @@ def chinsVirous(data):
 	ls.append("中国疫情总览------------------------------------------------")
 	dic1 = MoreDictGet(data,"chinaTotal","none")
 	dic2 = MoreDictGet(data,"chinaAdd","none")
+
 	# 确诊
 	ls.append("确诊:" + "       累计:" + str(dic1["confirm"]) + 
 		"例(新增:" + str(dic2["confirm"]) + ")" + 
 		"     现有:" + str(dic1["nowConfirm"]) + 
 		"例(新增:" + str(dic2["nowConfirm"]) + ")")
+
 	# 治愈
 	ls.append("治愈:" + "       累计:" + str(dic1["heal"]) + 
 		"例(新增:" + str(dic2["heal"]) + ")")
+
 	# 死亡
 	ls.append("死亡:" + "       累计:" + str(dic1["dead"]) + 
 		"例(新增:" + str(dic2["dead"]) + ")")
+
 	# 疑似
 	ls.append("疑似:" + "       现有:" + str(dic1["suspect"]) + 
 		"例(新增:" + str(dic2["suspect"]) + ")")
+
 	# 境外输入
 	ls.append("境外输入:" + "   累计:" + str(dic1["importedCase"]) + 
 		"例(新增:" + str(dic2["importedCase"]) + ")")
-	中这
+	
+	# 重症
+	ls.append("重症:" + "       现有:" + str(dic1["nowSevere"]) + 
+		"例(新增:" + str(dic2["nowSevere"]) + ")")
 
-	ls.append("中国疫情分省------------------------------------------------")
+	ls.append("中国各省疫情------------------------------------------------")
+
+	dic = MoreDictGet(data,"areaTree","none")
+	dic = MoreDictGet(dic[0],"children","none")
+
+	for di in dic:
+		print(dic)
+		# 获取信息并存入变量
+		name = MoreDictGet(di,"name","none")# 省
+		nowConfirm = MoreDictGet(di,"nowConfirm","none")# 现有确诊
+		confirm = MoreDictGet(di,"confirm","none")# 累计确诊
+		suspect = MoreDictGet(di,"suspect","none")# 疑似
+		dead = MoreDictGet(di,"dead","none")# 死亡
+		heal = MoreDictGet(di,"heal","none")# 治愈
+
+		ls.append(name + "     " + nowConfirm + "     " + suspect + "     " + confirm + "     " + heal + "     " + dead)
 
 	return ls
 
