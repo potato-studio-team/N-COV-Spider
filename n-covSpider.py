@@ -87,16 +87,17 @@ def chinsVirous(data):
 	dic = MoreDictGet(dic[0],"children","none")
 
 	for di in dic:
-		print(dic)
 		# 获取信息并存入变量
+		diIn = MoreDictGet(di,"total","none")
 		name = MoreDictGet(di,"name","none")# 省
-		nowConfirm = MoreDictGet(di,"nowConfirm","none")# 现有确诊
-		confirm = MoreDictGet(di,"confirm","none")# 累计确诊
-		suspect = MoreDictGet(di,"suspect","none")# 疑似
-		dead = MoreDictGet(di,"dead","none")# 死亡
-		heal = MoreDictGet(di,"heal","none")# 治愈
+		nowConfirm = MoreDictGet(diIn,"nowConfirm","none")# 现有确诊
+		confirm = MoreDictGet(diIn,"confirm","none")# 累计确诊
+		suspect = MoreDictGet(diIn,"suspect","none")# 疑似
+		dead = MoreDictGet(diIn,"dead","none")# 死亡
+		heal = MoreDictGet(diIn,"heal","none")# 治愈
 
-		ls.append(name + "     " + nowConfirm + "     " + suspect + "     " + confirm + "     " + heal + "     " + dead)
+		ls.append(str(name) + "     " + str(nowConfirm) + "     " + str(suspect) + 
+			"     " + str(confirm) + "     " + str(heal) + "     " + str(dead))
 
 	return ls
 
