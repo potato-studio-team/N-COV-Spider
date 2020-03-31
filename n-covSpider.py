@@ -197,27 +197,23 @@ def chinsVirous(data):
 
 # 国际疫情处理
 def foreignVirous(data):
+	ls = []
+
 	dic = MoreDictGet(data,"data","none")
 
-	wdConfirmAdd = 0
-	wdNowConfirm = 0
-	wdConfirm = 0
-	wdDead = 0
-	wdHeal = 0
-	wdNowConfirmCompare = 0
-	wdHealCompare = 0
-	wdDeadCompare = 0
-
+	num = 0
 	for di in dic:
-		# 全部数据计算
-		wdConfirmAdd = MoreDictGet(di,"confirmAdd","none") + wdConfirmAdd
-		wdNowConfirm = MoreDictGet(di,"nowConfirm","none") + wdNowConfirm
-		wdConfirm = MoreDictGet(di,"confirm","none") + wdConfirm
-		wdDead = MoreDictGet(di,"dead","none") + wdDead
-		wdHeal = MoreDictGet(di,"heal","none") + wdHeal
-		wdNowConfirmCompare = MoreDictGet(di,"nowConfirmCompare","none") + wdNowConfirmCompare
-		wdHealCompare = MoreDictGet(di,"healCompare","none") + wdHealCompare
-		wdDeadCompare = MoreDictGet(di,"deadCompare","none") + wdDeadCompare
+		# 各国数据统计并输出
+		cName = MoreDictGet(di,"name","none")
+		wdNowConfirm = MoreDictGet(di,"nowConfirm","none")
+		wdConfirm = MoreDictGet(di,"confirm","none")
+		wdDead = MoreDictGet(di,"dead","none")
+		wdHeal = MoreDictGet(di,"heal","none")
+
+		num = num + 1
+
+		ls.append(str(num) + ".  " + str(cName) + "   " + str(wdConfirm) + 
+			"   " + str(wdNowConfirm) + "   " + wdHeal + "   " + wdDead)
 
 
 def writeFile(place,data):
