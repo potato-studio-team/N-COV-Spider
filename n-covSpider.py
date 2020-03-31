@@ -1,3 +1,12 @@
+###############potato N-COV Spider##################
+# 本定向爬虫用于爬取疫情数据，并进行统计
+# 数据来源：腾讯
+# 作者：PotatoStudio
+# 语言：Python
+# 联系：potatostuser@163.com
+# 官网：www.potatost.xyz
+####################################################
+
 import requests
 import json
 import types
@@ -265,11 +274,12 @@ def writeFile(place,data):
     file.close()
 
 def main():
+	print("###############potato N-COV Spider##################\n# 本定向爬虫用于爬取疫情数据，并进行统计\n# 数据来源：腾讯\n# 作者：PotatoStudio\n# 语言：Python\n# 联系：potatostuser@163.com\n# 官网：www.potatost.xyz\n####################################################")
 	# 疫情分类，分为国内：0，国外：1
 	dataJs = ["none"]*2
 	dataLs = ["none"]*2
 
-	print("#正在获取数据...\n")
+	print("\n#正在获取数据......\n")
 	dataJs[0] = getInformationChina()
 	dataJs[1] = getInformationForeign()
 
@@ -287,21 +297,22 @@ def main():
 		for i in result:
 			print(i + "\n")
 
-		check = input("\n请输入你要查看的数据类型：\n\n总览：M\n\n中国疫情：C\n\n国际疫情：F\n>>>")
-		if check == "M" or check == "m":
-			result = MainVirous(dataLs)
+		while(1):
+			check = input("\n请输入你要查看的数据类型：\n\n总览：M\n\n中国疫情：C\n\n国际疫情：F\n\n回车退出\n>>>")
+			if check == "M" or check == "m":
+				result = MainVirous(dataLs)
+	
+			elif check == "C" or check == "c":
+				result = chinsVirous(dataLs[0])
+	
+			elif check == "F" or check == "f":
+				result = foreignVirous(dataLs[1])
 
-		elif check == "C" or check == "c":
-			result = chinsVirous(dataLs[0])
+			else:
+				break
+	
+			for i in result:
+				print(i + "\n")
 
-		elif check == "F" or check == "f":
-			result = foreignVirous(dataLs[1])
-
-
-		for i in result:
-			print(i + "\n")
-
-		# writeFile("test.txt",result[0])
-	input("回车退出")
 
 main()
