@@ -197,7 +197,27 @@ def chinsVirous(data):
 
 # 国际疫情处理
 def foreignVirous(data):
-	pass
+	dic = MoreDictGet(data,"data","none")
+
+	wdConfirmAdd = 0
+	wdNowConfirm = 0
+	wdConfirm = 0
+	wdDead = 0
+	wdHeal = 0
+	wdNowConfirmCompare = 0
+	wdHealCompare = 0
+	wdDeadCompare = 0
+
+	for di in dic:
+		# 全部数据计算
+		wdConfirmAdd = MoreDictGet(di,"confirmAdd","none") + wdConfirmAdd
+		wdNowConfirm = MoreDictGet(di,"nowConfirm","none") + wdNowConfirm
+		wdConfirm = MoreDictGet(di,"confirm","none") + wdConfirm
+		wdDead = MoreDictGet(di,"dead","none") + wdDead
+		wdHeal = MoreDictGet(di,"heal","none") + wdHeal
+		wdNowConfirmCompare = MoreDictGet(di,"nowConfirmCompare","none") + wdNowConfirmCompare
+		wdHealCompare = MoreDictGet(di,"healCompare","none") + wdHealCompare
+		wdDeadCompare = MoreDictGet(di,"deadCompare","none") + wdDeadCompare
 
 
 def writeFile(place,data):
@@ -223,12 +243,21 @@ def main():
 
 		dataLs = dataMake(dataJs,dataLs)
 
-		check = input("请输入你要查看的数据类型\n总览：M\n中国疫情：C\n国际疫情：F\n>>>")
+		result = MainVirous(dataLs)
+
+		print("以下是疫情的总览数据")
+		for i in result:
+			print(i + "\n")
+
+		check = input("请输入你要查看的数据类型：\n\n总览：M\n\n中国疫情：C\n\n国际疫情：F\n>>>")
 		if check == "M" or check == "m":
 			result = MainVirous(dataLs)
 
 		elif check == "C" or check == "c":
 			result = chinsVirous(dataLs[0])
+
+		elif check == "F" or check == "f":
+			result = foreignVirous(dataLs[1])
 
 
 		for i in result:
