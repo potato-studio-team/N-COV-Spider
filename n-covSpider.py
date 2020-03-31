@@ -86,8 +86,12 @@ def chinsVirous(data):
 	dic = MoreDictGet(data,"areaTree","none")
 	dic = MoreDictGet(dic[0],"children","none")
 
+	ls.append("编号 省份  现有确诊  现有疑似  累计确诊  治愈  死亡")
+	num = 0
+
 	for di in dic:
 		# 获取信息并存入变量
+
 		diIn = MoreDictGet(di,"total","none")
 		name = MoreDictGet(di,"name","none")# 省
 		nowConfirm = MoreDictGet(diIn,"nowConfirm","none")# 现有确诊
@@ -96,7 +100,9 @@ def chinsVirous(data):
 		dead = MoreDictGet(diIn,"dead","none")# 死亡
 		heal = MoreDictGet(diIn,"heal","none")# 治愈
 
-		ls.append(str(name) + "     " + str(nowConfirm) + "     " + str(suspect) + 
+		num = num + 1
+
+		ls.append(str(num) + ".  " + str(name) + "     " + str(nowConfirm) + "     " + str(suspect) + 
 			"     " + str(confirm) + "     " + str(heal) + "     " + str(dead))
 
 	return ls
