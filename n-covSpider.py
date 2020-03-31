@@ -37,9 +37,7 @@ def MoreDictGet(dict,objkey,default):
 	for k,v in tmp.items():
 		if k == objkey:
 			return v
-		print(v)
-		print(type(v))
-		if type(v) == dict:
+		elif type(v) == dict:
 			rel = MoreDictGet(v,objkey,default)
 			return rel
 
@@ -51,7 +49,32 @@ def chinsVirous(data):
 	data = eval(data["data"].replace("true","True").replace("false","False"))
 	
 	# 搜索日期数据
-	ls.append(MoreDictGet(data,"lastUpdateTime","none"))
+	ls.append("数据更新时间：" + MoreDictGet(data,"lastUpdateTime","none"))
+	
+	ls.append("中国疫情总览------------------------------------------------")
+	dic1 = MoreDictGet(data,"chinaTotal","none")
+	dic2 = MoreDictGet(data,"chinaAdd","none")
+	# 确诊
+	ls.append("确诊:" + "       累计:" + str(dic1["confirm"]) + 
+		"例(新增:" + str(dic2["confirm"]) + ")" + 
+		"     现有:" + str(dic1["nowConfirm"]) + 
+		"例(新增:" + str(dic2["nowConfirm"]) + ")")
+	# 治愈
+	ls.append("治愈:" + "       累计:" + str(dic1["heal"]) + 
+		"例(新增:" + str(dic2["heal"]) + ")")
+	# 死亡
+	ls.append("死亡:" + "       累计:" + str(dic1["dead"]) + 
+		"例(新增:" + str(dic2["dead"]) + ")")
+	# 疑似
+	ls.append("疑似:" + "       现有:" + str(dic1["suspect"]) + 
+		"例(新增:" + str(dic2["suspect"]) + ")")
+	# 境外输入
+	ls.append("境外输入:" + "   累计:" + str(dic1["importedCase"]) + 
+		"例(新增:" + str(dic2["importedCase"]) + ")")
+	中这
+
+	ls.append("中国疫情分省------------------------------------------------")
+
 	return ls
 
 def writeFile(place,data):
@@ -79,7 +102,9 @@ def main():
 
 		chinaRuselt = chinsVirous(dataLs[0])
 
-		print(chinaRuselt)
+		for i in chinaRuselt:
+			print(i + "\n")
+
 		# writeFile("test.txt",result[0])
 	input("回车退出")
 
