@@ -200,10 +200,49 @@ def foreignVirous(data):
 	ls = []
 
 	dic = MoreDictGet(data,"data","none")
-
 	num = 0
 
+	wdConfirmAdd = 0
+	wdNowConfirm = 0
+	wdConfirm = 0
+	wdDead = 0
+	wdHeal = 0
+	wdNowConfirmCompare = 0
+	wdHealCompare = 0
+	wdDeadCompare = 0
+
+	for di in dic:
+		# 全部数据计算
+		wdConfirmAdd = MoreDictGet(di,"confirmAdd","none") + wdConfirmAdd
+		wdNowConfirm = MoreDictGet(di,"nowConfirm","none") + wdNowConfirm
+		wdConfirm = MoreDictGet(di,"confirm","none") + wdConfirm
+		wdDead = MoreDictGet(di,"dead","none") + wdDead
+		wdHeal = MoreDictGet(di,"heal","none") + wdHeal
+		wdNowConfirmCompare = MoreDictGet(di,"nowConfirmCompare","none") + wdNowConfirmCompare
+		wdHealCompare = MoreDictGet(di,"healCompare","none") + wdHealCompare
+		wdDeadCompare = MoreDictGet(di,"deadCompare","none") + wdDeadCompare
+
+
+	ls.append("\n世界疫情总览-------------------------------------------------------")
+
+	# 确诊
+	ls.append("确诊:" + "       累计:" + str(wdConfirm) + 
+		"例(新增:" + str(wdConfirmAdd) + ")" + 
+		"     现有:" + str(wdNowConfirm) + 
+		"例(新增:" + str(wdNowConfirmCompare) + ")")
+
+	# 治愈
+	ls.append("治愈:" + "       累计:" + str(wdHeal) + 
+		"例(新增:" + str(wdHealCompare) + ")")
+
+	# 死亡
+	ls.append("死亡:" + "       累计:" + str(wdDead) + 
+		"例(新增:" + str(wdDeadCompare) + ")")
+
+	ls.append("世界各国疫情------------------------------------------------")
+
 	ls.append("排序 国家   累计确诊   新增确诊  治愈   死亡")
+
 	for di in dic:
 		# 各国数据统计并输出
 		cName = MoreDictGet(di,"name","none")
